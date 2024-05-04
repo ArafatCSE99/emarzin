@@ -110,6 +110,7 @@
                   <li class="nav-item"> <a class="nav-link" onclick="GetBasicInfo()" style="cursor:pointer;" >Basic Info</a></li>
                   <li class="nav-item"> <a class="nav-link" onclick="GetCategory()" style="cursor:pointer;">Category</a></li>
                   <li class="nav-item"> <a class="nav-link" onclick="GetSubCategory()" style="cursor:pointer;">Sub Category</a></li>
+                  <li class="nav-item"> <a class="nav-link" onclick="GetVendor()" style="cursor:pointer;">Vendor</a></li>
 
                   <!-- <li class="nav-item"> <a class="nav-link" href="pages/ui-features/typography.html">Sub Category</a></li> -->
                 </ul>

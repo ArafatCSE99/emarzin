@@ -150,6 +150,10 @@ function Delete(id,table)
            if(table=='sub_category'){
              GetSubCategory();
           }
+          else if(table=='vendor')
+          {
+            GetVendor();
+          }
            else{
              
            }
@@ -307,6 +311,77 @@ function EditSubCategory(id,e)
     var is_active=row.find('.is_active').text();
 
     $('#name').val(name);
+    if(is_active=="Inactive"){
+       $( "#isactive" ).prop( "checked", false );
+    }
+    else
+    {
+        $( "#isactive" ).prop( "checked", true );
+    }
+    $("html, body").animate({ scrollTop: $(document).height()-$(window).height() });
+    
+}
+
+
+function GetVendor()
+{
+    $.ajax({
+        type: "POST",
+        url: "API/getVendor.php",
+        data: '',
+        cache: false,
+        success: function(html) {
+           $('.content-wrapper').html(html);
+           let table = new DataTable('#vendorTbl');
+           $("html, body").animate({ scrollTop: 0 }, "slow");
+        }
+        });
+}
+
+
+
+var VendorId=0;
+function SaveVendor()
+{
+    var name=$('#name').val();
+    var username=$('#username').val();
+    var password=$('#password').val();
+    var is_active=$('#isactive').is(":checked");
+    if(is_active)
+    {
+        is_active=1;
+    }
+    else{
+        is_active=0;
+    }
+    var dataString='name='+name+'&is_active='+is_active+'&id='+VendorId+'&username='+username+'&password='+password;
+
+    $.ajax({
+        type: "POST",
+        url: "API/saveVendor.php",
+        data: dataString,
+        cache: false,
+        success: function(html) {
+           alert(html);
+           VendorId=0;
+           GetVendor();
+        }
+    });
+}
+
+
+function EditVendor(id,e)
+{
+    VendorId=id;
+    var row = $(e).closest('tr');
+    var name=row.find('.name').text();
+    var username=row.find('.username').text();
+    var password=row.find('.password').text();
+    var is_active=row.find('.is_active').text();
+
+    $('#name').val(name);
+    $('#username').val(username);
+    $('#password').val(password);
     if(is_active=="Inactive"){
        $( "#isactive" ).prop( "checked", false );
     }
